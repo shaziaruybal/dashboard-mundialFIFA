@@ -668,6 +668,12 @@ class: center, middle
 #### [Ejemplos de otros flexdashboards](https://pkgs.rstudio.com/flexdashboard/articles/examples.html)
 
 ---
+
+class: inverse, center, middle
+
+# `r fa("arrow-up-right-from-square")` Casos de uso: Demo y ejemplos de dashboards que yo he creado
+
+---
 name: contact
 class: inverse
 
@@ -709,3 +715,31 @@ class: inverse, middle, center
 
 --
 # `r fa("circle-question")` ¿Preguntas?
+
+---
+class: left
+
+# `r fa("list-check")` Actividad (opcional)
+
+--
+
+#### `r fa("square-check")` Si no lo has hecho todavía, intenta recrear el dashboard que vimos juntos en el taller 
+
+--
+
+#### `r fa("square-check")` Intenta crear nuevas visualizaciones o modifica el tema de tu dashboard
+
+--
+
+#### `r fa("square-check")` Explora otros aspectos de los datos de los mundiales y visualizalos en tu dashboard
+
+--
+
+#### `r fa("square-check")` Comparte tu dashboard con el resto
+
+--
+
+.footnote[
+Si quieres empezar desde el .rmd que creamos juntos, lo puedes encontrar [aquí `r fa("arrow-up-right-from-square")`](https://shaziaruybal.github.io/dashboard-mundialFIFA/dashboard.rmd) 
+]
+
