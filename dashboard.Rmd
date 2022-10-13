@@ -1,0 +1,84 @@
+---
+title: "Explora la copa mundial FIFA desde el 1930-2014 ⚽"
+output: 
+  flexdashboard::flex_dashboard:
+    theme:
+      version: 4
+      bootswatch: journal
+      base_font:
+        google: Prompt
+      code_font:
+        google: JetBrains Mono
+    orientation: columns
+    vertical_layout: fill
+---
+
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(here)
+library(tidyverse)
+library(DT)
+thematic::thematic_rmd(font = "auto")
+
+partidos <- read.csv("data/WorldCupMatches.csv")
+jugadores <- read.csv("data/WorldCupPlayers.csv")
+copas <- read.csv("data/WorldCups.csv")
+```
+
+Column {data-width=650 .tabset}
+-----------------------------------------------------------------------
+
+### 🏆 Los campeones del mundial
+
+```{r}
+copas %>% 
+  mutate(Winner = case_when(Winner == "Germany FR" ~ "Germany",
+                            TRUE ~ Winner)) %>% 
+  count(Winner) %>% 
+  ggplot(aes(x=reorder(Winner,n), y=n)) +
+    geom_col() +
+    xlab("Campeón") +
+    theme_minimal() 
+```
+
+### ⚽ Número de goles
+
+```{r}
+copas %>% 
+  ggplot(aes(x=Year, y=GoalsScored)) +
+    geom_line() +
+    geom_point() +
+    theme_minimal() 
+```
+
+### 🏅Países en los top 4 
+
+```{r}
+copas %>% 
+  select(Winner:Fourth) %>% 
+  pivot_longer(cols=Winner:Fourth, names_to="lugar", values_to="pais") %>% 
+  mutate(pais = case_when(pais == "Germany FR" ~ "Germany",
+                            TRUE ~ pais)) %>% 
+  count(pais) %>% 
+  ggplot(aes(x=reorder(pais,n), y=n)) +
+    geom_col() +
+    xlab("País") +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45)) 
+```
+
+### 🗒️Explora y descarga los datos
+
+```{r}
+datatable(copas,
+          extensions = "Buttons", 
+            options = list(dom = "Bfrtip", 
+                           buttons = (list(
+                             "copy", list(
+                               extend = "collection", 
+                               buttons = c("csv", "excel"), 
+                               text = "Download")))), 
+            rownames = F, 
+            filter = "top")
+```
