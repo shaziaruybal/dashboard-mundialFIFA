@@ -293,7 +293,7 @@ class: inverse, center, middle
 class: top, center
 
 &lt;video width="1530" height="610" controls&gt;
-  &lt;source src="img/flex_default.mp4" type="video/mp4"&gt; 
+  &lt;source src="vid/flex_default.mp4" type="video/mp4"&gt; 
 &lt;/video&gt;
 
 ---
@@ -495,18 +495,6 @@ copas %&gt;%
 
 .panel[.panel-name[Output]
 
-```r
-copas %&gt;% 
-  mutate(Winner = case_when(Winner == "Germany FR" ~ "Germany",
-                            TRUE ~ Winner)) %&gt;% 
-  count(Winner) %&gt;% 
-  ggplot(aes(x=reorder(Winner,n), y=n)) +
-    geom_col() +
-    xlab("Campeón") +
-    theme_minimal()
-```
-
-&lt;img src="index_files/figure-html/unnamed-chunk-8-1.png" width="100%" /&gt;
 
 ]
 
@@ -526,15 +514,6 @@ copas %&gt;%
 
 .panel[.panel-name[Output]
 
-```r
-copas %&gt;% 
-  ggplot(aes(x=Year, y=GoalsScored)) +
-    geom_line() +
-    geom_point() +
-    theme_minimal()
-```
-
-&lt;img src="index_files/figure-html/unnamed-chunk-10-1.png" width="100%" /&gt;
 
 ]
 .panel[.panel-name[Visualiza los top 4]
@@ -559,21 +538,6 @@ copas %&gt;%
 
 .panel[.panel-name[Output]
 
-```r
-copas %&gt;% 
-  select(Winner:Fourth) %&gt;% 
-  pivot_longer(cols=Winner:Fourth, names_to="lugar", values_to="pais") %&gt;% 
-  mutate(pais = case_when(pais == "Germany FR" ~ "Germany",
-                            TRUE ~ pais)) %&gt;% 
-  count(pais) %&gt;% 
-  ggplot(aes(x=reorder(pais,n), y=n)) +
-    geom_col() +
-    xlab("País") +
-    theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45)) 
-```
-
-&lt;img src="index_files/figure-html/unnamed-chunk-12-1.png" width="100%" /&gt;
 
 ]
 .panel[.panel-name[Incluye una tabla]

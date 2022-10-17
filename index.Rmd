@@ -312,7 +312,7 @@ class: inverse, center, middle
 class: top, center
 
 <video width="1530" height="610" controls>
-  <source src="img/flex_default.mp4" type="video/mp4"> 
+  <source src="vid/flex_default.mp4" type="video/mp4"> 
 </video>
 
 ---
@@ -436,7 +436,7 @@ copas %>%
 ]
 
 .panel[.panel-name[Output]
-```{r}
+```{r include=F}
 copas %>% 
   mutate(Winner = case_when(Winner == "Germany FR" ~ "Germany",
                             TRUE ~ Winner)) %>% 
@@ -463,7 +463,7 @@ copas %>%
 ]
 
 .panel[.panel-name[Output]
-```{r}
+```{r include=F}
 copas %>% 
   ggplot(aes(x=Year, y=GoalsScored)) +
     geom_line() +
@@ -492,7 +492,7 @@ copas %>%
 ]
 
 .panel[.panel-name[Output]
-```{r}
+```{r include=F}
 copas %>% 
   select(Winner:Fourth) %>% 
   pivot_longer(cols=Winner:Fourth, names_to="lugar", values_to="pais") %>% 
