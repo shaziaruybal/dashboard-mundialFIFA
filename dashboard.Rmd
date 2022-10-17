@@ -19,6 +19,7 @@ library(flexdashboard)
 library(here)
 library(tidyverse)
 library(DT)
+library(plotly)
 thematic::thematic_rmd(font = "auto")
 
 partidos <- read.csv("data/WorldCupMatches.csv")
@@ -32,30 +33,30 @@ Column {data-width=650 .tabset}
 ### 🏆 Los campeones del mundial
 
 ```{r}
-copas %>% 
+ggplotly(copas %>% 
   mutate(Winner = case_when(Winner == "Germany FR" ~ "Germany",
                             TRUE ~ Winner)) %>% 
   count(Winner) %>% 
   ggplot(aes(x=reorder(Winner,n), y=n)) +
     geom_col() +
     xlab("Campeón") +
-    theme_minimal() 
+    theme_minimal()) 
 ```
 
 ### ⚽ Número de goles
 
 ```{r}
-copas %>% 
+ggplotly(copas %>% 
   ggplot(aes(x=Year, y=GoalsScored)) +
     geom_line() +
     geom_point() +
-    theme_minimal() 
+    theme_minimal()) 
 ```
 
 ### 🏅Países en los top 4 
 
 ```{r}
-copas %>% 
+ggplotly(copas %>% 
   select(Winner:Fourth) %>% 
   pivot_longer(cols=Winner:Fourth, names_to="lugar", values_to="pais") %>% 
   mutate(pais = case_when(pais == "Germany FR" ~ "Germany",
@@ -65,7 +66,7 @@ copas %>%
     geom_col() +
     xlab("País") +
     theme_minimal() +
-    theme(axis.text.x = element_text(angle = 45)) 
+    theme(axis.text.x = element_text(angle = 45)))
 ```
 
 ### 🗒️Explora y descarga los datos
